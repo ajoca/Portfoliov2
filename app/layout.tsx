@@ -4,7 +4,7 @@ import { inter } from './fonts'
 import { ThemeProvider } from 'next-themes'
 import Nav from '@/components/Nav'
 import { Analytics } from '@vercel/analytics/react'
-
+import MobileTabs from '@/components/MobileTabs'
 export const metadata = {
   metadataBase: new URL('https://ajoca.dev'),
   title: 'Alan Canto — Portfolio',
@@ -19,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-black text-white`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Nav />
+          <MobileTabs />
           {children}
           {process.env.NEXT_PUBLIC_ANALYTICS === 'vercel' && <Analytics />}
           {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
