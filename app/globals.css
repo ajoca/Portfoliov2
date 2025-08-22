@@ -13,3 +13,5 @@ html { scroll-behavior: smooth; }
 
 .card-glow { box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 25px 50px -12px rgba(0,0,0,0.25); }
 .lift:hover { transform: translateY(-2px); }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
