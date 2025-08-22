@@ -30,12 +30,3 @@ export function getAllPosts(): PostMeta[] {
     }
   }).sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
-
-export function getPostSource(slug: string): string | null {
-  const candidates = ['.mdx', '.md'].map(ext => path.join(POSTS_DIR, slug + ext))
-  const file = candidates.find(p => fs.existsSync(p))
-  if (!file) return null
-  const src = fs.readFileSync(file, 'utf-8')
-  const { content } = matter(src)
-  return content
-}
