@@ -1,11 +1,12 @@
-
+// app/blog/[slug]/page.tsx
 import Container from '@/components/Container'
 import { notFound } from 'next/navigation'
 import { getAllPosts, renderPost } from '@/lib/posts'
 
-export default async function BlogPost({ params }: { params: { slug: string }}) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const list = getAllPosts()
-  const found = list.find(p => p.slug === params.slug)
+  const found = list.find(p => p.slug === slug)
   if (!found) return notFound()
   const MDX = await renderPost(found.slug)
   return (
