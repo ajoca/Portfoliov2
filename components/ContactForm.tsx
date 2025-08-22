@@ -49,7 +49,7 @@ export default function ContactForm() {
       <button disabled={loading} className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm hover:bg-white/20 disabled:opacity-50">
         {loading ? 'Enviando…' : 'Enviar'}
       </button>
-      <p className="text-xs text-white/60">Alternativa: Formspree. Reemplazá el endpoint si querés 0 backend.</p>
+      
     </form>
   )
 }

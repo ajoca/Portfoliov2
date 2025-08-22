@@ -1,12 +1,17 @@
-
+// lib/posts.ts
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { MDXRemote } from 'next-mdx-remote/rsc'
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts')
 
-export type PostMeta = { title: string, date: string, excerpt?: string, tags?: string[], slug: string }
+export type PostMeta = {
+  title: string
+  date: string
+  excerpt?: string
+  tags?: string[]
+  slug: string
+}
 
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(POSTS_DIR)) return []
@@ -26,10 +31,11 @@ export function getAllPosts(): PostMeta[] {
   }).sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
-export async function renderPost(slug: string) {
-  const file = ['.mdx', '.md'].map(ext => path.join(POSTS_DIR, slug + ext)).find(p => fs.existsSync(p))
+export function getPostSource(slug: string): string | null {
+  const candidates = ['.mdx', '.md'].map(ext => path.join(POSTS_DIR, slug + ext))
+  const file = candidates.find(p => fs.existsSync(p))
   if (!file) return null
   const src = fs.readFileSync(file, 'utf-8')
   const { content } = matter(src)
-  return MDXRemote({ source: content })
+  return content
 }

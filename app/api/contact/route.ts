@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   }
   const RESEND_API_KEY = process.env.RESEND_API_KEY
   const TO = process.env.CONTACT_TO_EMAIL || process.env.TO_EMAIL
-  const FROM = process.env.CONTACT_FROM_EMAIL || 'portfolio@resend.dev'
+  const FROM = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev'
   if (!RESEND_API_KEY || !TO) {
     return NextResponse.json({ ok:false, error:'Resend no configurado. Configurá RESEND_API_KEY y CONTACT_TO_EMAIL o usa Formspree.' }, { status: 500 })
   }
