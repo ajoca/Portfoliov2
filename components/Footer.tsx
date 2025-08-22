@@ -1,0 +1,1 @@
+export default function Footer() { return (<footer className="mt-16 border-t border-white/10 py-8 text-center text-xs text-white/60">Hecho con ❤️ por Alan Canto — © {new Date().getFullYear()}</footer> ) }
