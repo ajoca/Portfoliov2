@@ -1,41 +1,17 @@
-// app/blog/[slug]/page.tsx
+// app/contact/page.tsx
 import Container from '@/components/Container'
-import { notFound } from 'next/navigation'
-import { getAllPosts } from '@/lib/posts'
+import ContactForm from '@/components/ContactForm'
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+export const metadata = { title: 'Contacto — Alan Canto' }
 
-  // Validamos que el slug exista por meta
-  const list = getAllPosts()
-  const found = list.find(p => p.slug === slug)
-  if (!found) return notFound()
-
-  // Import dinámico del MDX (nativo Next + @next/mdx)
-  let MDX: React.ComponentType
-  try {
-    MDX = (await import(`@/content/posts/${slug}.mdx`)).default
-  } catch {
-    try {
-      MDX = (await import(`@/content/posts/${slug}.md`)).default
-    } catch {
-      return notFound()
-    }
-  }
-
+export default function ContactPage() {
   return (
     <main className="py-12">
       <Container>
-        <div className="text-sm text-white/60">{new Date(found.date).toLocaleDateString()}</div>
-        <h1 className="text-3xl font-bold mb-6">{found.title}</h1>
-        <article className="prose prose-invert max-w-none">
-          <MDX />
-        </article>
+        <h1 className="text-3xl font-bold mb-6">Contacto</h1>
+        <p className="text-white/80 mb-6">¿Tenés una idea o proyecto? Escribime y lo charlamos.</p>
+        <ContactForm />
       </Container>
     </main>
   )
-}
-
-export async function generateStaticParams() {
-  return getAllPosts().map(p => ({ slug: p.slug }))
 }
