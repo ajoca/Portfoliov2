@@ -1,20 +1,17 @@
-
-/** @type {import('next').NextConfig} */
+// next.config.mjs
 import createMDX from '@next/mdx'
 
-const withMDX = createMDX({
-  extension: /\.mdx?$/,
-})
+const withMDX = createMDX()
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
-      { protocol: 'https', hostname: 'raw.githubusercontent.com' },
-      { protocol: 'https', hostname: 'github.com' }
-    ]
+      { protocol: 'https', hostname: 'github.com' },
+    ],
   },
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 }
 
 export default withMDX(nextConfig)
